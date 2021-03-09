@@ -97,7 +97,7 @@ end
 mag = [0; mag];
 mag_scal = mag*100;
 
-T = readtable("G:\09.16 ½ÇÇè\crash.csv");
+T = readtable("G:\09.16 Â½Ã‡Ã‡Ã¨\crash.csv");
 duration = table2array(T(end,3));
 
 mag_time = 0:duration/numel(mag):duration;
