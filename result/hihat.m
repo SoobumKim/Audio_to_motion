@@ -2,14 +2,14 @@ clc
 close all
 clear
 
-Marker_1 = cell2mat(struct2cell(load('crash_point1.mat'))); Marker_1(1:43,:) = [];
-Marker_2 = cell2mat(struct2cell(load('crash_point2.mat'))); Marker_2(1:43,:) = [];
-Marker_3 = cell2mat(struct2cell(load('crash_point3.mat'))); Marker_3(1:43,:) = [];
-Marker_4 = cell2mat(struct2cell(load('crash_point4.mat'))); Marker_4(1:43,:) = [];
-Marker_5 = cell2mat(struct2cell(load('crash_point5.mat'))); Marker_5(1:43,:) = [];
-Marker_6 = cell2mat(struct2cell(load('crash_point6.mat'))); Marker_6(1:43,:) = [];
-Marker_7 = cell2mat(struct2cell(load('crash_point7.mat'))); Marker_7(1:43,:) = [];
-Marker_8 = cell2mat(struct2cell(load('crash_point8.mat'))); Marker_8(1:43,:) = [];
+Marker_1 = cell2mat(struct2cell(load('hihat_point1.mat'))); 
+Marker_2 = cell2mat(struct2cell(load('hihat_point2.mat')));
+Marker_3 = cell2mat(struct2cell(load('hihat_point3.mat'))); 
+Marker_4 = cell2mat(struct2cell(load('hihat_point4.mat'))); 
+Marker_5 = cell2mat(struct2cell(load('hihat_point5.mat'))); 
+Marker_6 = cell2mat(struct2cell(load('hihat_point6.mat'))); 
+Marker_7 = cell2mat(struct2cell(load('hihat_point7.mat'))); 
+Marker_8 = cell2mat(struct2cell(load('hihat_point8.mat'))); 
 
 
 marker = [Marker_1; Marker_2; Marker_3; Marker_4; Marker_5; Marker_6; Marker_7; Marker_8];
@@ -97,7 +97,7 @@ end
 mag = [0; mag];
 mag_scal = mag*100;
 
-T = readtable("G:\09.16 실험\crash.csv");
+T = readtable("G:\09.16 실험\hihat.csv");
 duration = table2array(T(end,3));
 
 mag_time = 0:duration/numel(mag):duration;
@@ -110,7 +110,7 @@ set(gca,'FontSize',13,'FontWeight','bold')
 xlabel('Time [s]')
 ylabel('Position movement [cm]')
 
-xlim([4.172 mag_time(end)])
+xlim([3 mag_time(end)])
 
 %%
 info_sum = audioinfo('F:\2020\KIST\2. code\Matlab\sound\original sound\SOS_16.wav');

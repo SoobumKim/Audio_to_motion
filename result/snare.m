@@ -2,14 +2,14 @@ clc
 close all
 clear
 
-Marker_1 = cell2mat(struct2cell(load('crash_point1.mat'))); Marker_1(1:43,:) = [];
-Marker_2 = cell2mat(struct2cell(load('crash_point2.mat'))); Marker_2(1:43,:) = [];
-Marker_3 = cell2mat(struct2cell(load('crash_point3.mat'))); Marker_3(1:43,:) = [];
-Marker_4 = cell2mat(struct2cell(load('crash_point4.mat'))); Marker_4(1:43,:) = [];
-Marker_5 = cell2mat(struct2cell(load('crash_point5.mat'))); Marker_5(1:43,:) = [];
-Marker_6 = cell2mat(struct2cell(load('crash_point6.mat'))); Marker_6(1:43,:) = [];
-Marker_7 = cell2mat(struct2cell(load('crash_point7.mat'))); Marker_7(1:43,:) = [];
-Marker_8 = cell2mat(struct2cell(load('crash_point8.mat'))); Marker_8(1:43,:) = [];
+Marker_1 = cell2mat(struct2cell(load('snare_point1.mat')));
+Marker_2 = cell2mat(struct2cell(load('snare_point2.mat')));
+Marker_3 = cell2mat(struct2cell(load('snare_point3.mat')));
+Marker_4 = cell2mat(struct2cell(load('snare_point4.mat')));
+Marker_5 = cell2mat(struct2cell(load('snare_point5.mat')));
+Marker_6 = cell2mat(struct2cell(load('snare_point6.mat')));
+Marker_7 = cell2mat(struct2cell(load('snare_point7.mat')));
+Marker_8 = cell2mat(struct2cell(load('snare_point8.mat'))); 
 
 
 marker = [Marker_1; Marker_2; Marker_3; Marker_4; Marker_5; Marker_6; Marker_7; Marker_8];
@@ -30,9 +30,9 @@ scl = 10;
 
 for k = 1:length(Marker_1)
 
-     leaf_x = [Marker_1(k,1), Marker_3(k,1), Marker_5(k,1), Marker_6(k,1), Marker_4(k,1), Marker_2(k,1), Marker_1(k,1)];   
-     leaf_y = [Marker_1(k,2), Marker_3(k,2), Marker_5(k,2), Marker_6(k,2), Marker_4(k,2), Marker_2(k,2), Marker_1(k,2)];   
-     leaf_z = [Marker_1(k,3), Marker_3(k,3), Marker_5(k,3), Marker_6(k,3), Marker_4(k,3), Marker_2(k,3), Marker_1(k,3)];  
+     leaf_x = [Marker_1(k,1), Marker_3(k,1), Marker_5(k,1), Marker_8(k,1), Marker_4(k,1), Marker_2(k,1), Marker_1(k,1)];   
+     leaf_y = [Marker_1(k,2), Marker_3(k,2), Marker_5(k,2), Marker_8(k,2), Marker_4(k,2), Marker_2(k,2), Marker_1(k,2)];   
+     leaf_z = [Marker_1(k,3), Marker_3(k,3), Marker_5(k,3), Marker_8(k,3), Marker_4(k,3), Marker_2(k,3), Marker_1(k,3)];  
      
      plot3(leaf_x,-leaf_z, leaf_y,'-o','Color', 'g'); hold on;   
      plot3(leaf_x,-leaf_z, leaf_y,'o','Color', 'k'); hold on; 
@@ -43,15 +43,15 @@ for k = 1:length(Marker_1)
      plot3(branch_x, -branch_z, branch_y,'-o','Color', 'g'); hold on;  
      plot3(branch_x, -branch_z, branch_y,'o','Color', 'k'); hold on;
 
-     ref_x = [Marker_1(k,1), Marker_6(k,1)];
-     ref_y = [Marker_1(k,2), Marker_6(k,2)];
-     ref_z = [Marker_1(k,3), Marker_6(k,3)];
+     ref_x = [Marker_1(k,1), Marker_8(k,1)];
+     ref_y = [Marker_1(k,2), Marker_8(k,2)];
+     ref_z = [Marker_1(k,3), Marker_8(k,3)];
      plot3(ref_x, -ref_z, ref_y,'-o','Color', 'g'); hold on;  
      plot3(ref_x, -ref_z, ref_y,'o','Color', 'k'); hold on;
      
-     markers_x = [Marker_1(k,1), Marker_3(k,1), Marker_5(k,1), Marker_6(k,1), Marker_4(k,1), Marker_2(k,1)];
-     markers_y = [Marker_1(k,2), Marker_3(k,2), Marker_5(k,2), Marker_6(k,2), Marker_4(k,2), Marker_2(k,2)];
-     markers_z = [Marker_1(k,3), Marker_3(k,3), Marker_5(k,3), Marker_6(k,3), Marker_4(k,3), Marker_2(k,3)];
+     markers_x = [Marker_1(k,1), Marker_3(k,1), Marker_5(k,1), Marker_8(k,1), Marker_4(k,1), Marker_2(k,1)];
+     markers_y = [Marker_1(k,2), Marker_3(k,2), Marker_5(k,2), Marker_8(k,2), Marker_4(k,2), Marker_2(k,2)];
+     markers_z = [Marker_1(k,3), Marker_3(k,3), Marker_5(k,3), Marker_8(k,3), Marker_4(k,3), Marker_2(k,3)];
  
      leaf_x_rot = rot90(markers_x);
      leaf_y_rot = rot90(markers_y);
@@ -97,7 +97,7 @@ end
 mag = [0; mag];
 mag_scal = mag*100;
 
-T = readtable("G:\09.16 실험\crash.csv");
+T = readtable("G:\09.16 실험\snare.csv");
 duration = table2array(T(end,3));
 
 mag_time = 0:duration/numel(mag):duration;
@@ -110,7 +110,7 @@ set(gca,'FontSize',13,'FontWeight','bold')
 xlabel('Time [s]')
 ylabel('Position movement [cm]')
 
-xlim([4.172 mag_time(end)])
+xlim([3.831 mag_time(end)])
 
 %%
 info_sum = audioinfo('F:\2020\KIST\2. code\Matlab\sound\original sound\SOS_16.wav');

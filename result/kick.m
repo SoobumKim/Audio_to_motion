@@ -2,14 +2,14 @@ clc
 close all
 clear
 
-Marker_1 = cell2mat(struct2cell(load('crash_point1.mat'))); Marker_1(1:43,:) = [];
-Marker_2 = cell2mat(struct2cell(load('crash_point2.mat'))); Marker_2(1:43,:) = [];
-Marker_3 = cell2mat(struct2cell(load('crash_point3.mat'))); Marker_3(1:43,:) = [];
-Marker_4 = cell2mat(struct2cell(load('crash_point4.mat'))); Marker_4(1:43,:) = [];
-Marker_5 = cell2mat(struct2cell(load('crash_point5.mat'))); Marker_5(1:43,:) = [];
-Marker_6 = cell2mat(struct2cell(load('crash_point6.mat'))); Marker_6(1:43,:) = [];
-Marker_7 = cell2mat(struct2cell(load('crash_point7.mat'))); Marker_7(1:43,:) = [];
-Marker_8 = cell2mat(struct2cell(load('crash_point8.mat'))); Marker_8(1:43,:) = [];
+Marker_1 = cell2mat(struct2cell(load('kick_point1.mat')));
+Marker_2 = cell2mat(struct2cell(load('kick_point2.mat')));
+Marker_3 = cell2mat(struct2cell(load('kick_point3.mat')));
+Marker_4 = cell2mat(struct2cell(load('kick_point4.mat')));
+Marker_5 = cell2mat(struct2cell(load('kick_point5.mat')));
+Marker_6 = cell2mat(struct2cell(load('kick_point6.mat')));
+Marker_7 = cell2mat(struct2cell(load('kick_point7.mat')));
+Marker_8 = cell2mat(struct2cell(load('kick_point8.mat'))); 
 
 
 marker = [Marker_1; Marker_2; Marker_3; Marker_4; Marker_5; Marker_6; Marker_7; Marker_8];
@@ -26,7 +26,7 @@ v = VideoWriter('C:\Users\ADmin\Desktop\front_view_mid');
 
 open(v);
 
-scl = 10;
+scl = 100; %frame 조절
 
 for k = 1:length(Marker_1)
 
@@ -97,24 +97,21 @@ end
 mag = [0; mag];
 mag_scal = mag*100;
 
-T = readtable("G:\09.16 실험\crash.csv");
-duration = table2array(T(end,3));
+plot(mag_scal, 'LineWidth', 1, 'Color', 'k')
+title("Audio Signal of Reference Music",'fontweight','bold','fontsize',13)
+xlabel("Time [s]",'fontweight','bold','fontsize',13)
+ylabel("Position Movement [cm]",'fontweight','bold','fontsize',13)
+xlim([252 2500])
+x0=500;
+y0=500;
+width=1500;
+height=350;
+set(gcf,'position',[x0,y0,width,height])
 
-mag_time = 0:duration/numel(mag):duration;
-mag_time = mag_time(1:end-1);
-mag_time = reshape(mag_time ,length(mag_time),1);
-
-plot(mag_time,mag_scal, 'LineWidth', 1, 'Color', 'k')
-
-set(gca,'FontSize',13,'FontWeight','bold')
-xlabel('Time [s]')
-ylabel('Position movement [cm]')
-
-xlim([4.172 mag_time(end)])
 
 %%
-info_sum = audioinfo('F:\2020\KIST\2. code\Matlab\sound\original sound\SOS_16.wav');
-[music_sum,fs_sum] = audioread('F:\2020\KIST\2. code\Matlab\sound\original sound\SOS_16.wav');
+info_sum = audioinfo('G:\2020\KIST\2. code\Matlab\sound\original sound\Data\SOS\SOS_16.wav');
+[music_sum,fs_sum] = audioread('G:\2020\KIST\2. code\Matlab\sound\original sound\Data\SOS\SOS_16.wav');
 xlab_sum = 0:1/info_sum.SampleRate:info_sum.Duration;
 xlab_sum = xlab_sum(1:even(numel(xlab_sum))); % Time Term
 
